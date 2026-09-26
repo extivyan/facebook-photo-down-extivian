@@ -76,7 +76,13 @@ app.post('/api/extract-fv', async (req, res) => {
             downloadUrl: downloadLink
         });
 
-    } xcatch (error) {
-        // ... (سيتم التقاط الخطأ وإرجاعه)
+    } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ 
+            error: 'حدث خطأ أثناء معالجة الطلب', 
+            details: error.response?.data || error.message 
+        });
     }
 });
+
+module.exports = app;
